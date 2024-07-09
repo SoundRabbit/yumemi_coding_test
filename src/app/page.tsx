@@ -1,5 +1,11 @@
+import { SelectPrefectures } from '@/components/SelectPrefectures';
+
 const App = () => {
-  return <main />;
+  return (
+    <main>
+      <SelectPrefectures />
+    </main>
+  );
 };
 
 export default App;
