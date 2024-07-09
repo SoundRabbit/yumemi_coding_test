@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@tanstack/react-query':
+    specifier: ^5.50.1
+    version: 5.50.1(react@18.3.1)
+  io-ts:
+    specifier: ^2.2.21
+    version: 2.2.21(fp-ts@2.16.8)
   next:
     specifier: 14.2.4
     version: 14.2.4(@babel/core@7.24.7)(react-dom@18.3.1)(react@18.3.1)
@@ -912,6 +918,19 @@ packages:
     dependencies:
       '@swc/counter': 0.1.3
       tslib: 2.6.3
+    dev: false
+
+  /@tanstack/query-core@5.50.1:
+    resolution: {integrity: sha512-lpfhKPrJlyV2DSVcQb/HuozH3Av3kws4ge22agx+lNGpFkS4vLZ7St0l3GLwlAD+bqB+qXGex3JdRKUNtMviEQ==}
+    dev: false
+
+  /@tanstack/react-query@5.50.1(react@18.3.1):
+    resolution: {integrity: sha512-s0DW3rVBDPReDDovUjVqItVa3R2nPfUANK9nqGvarO2DwTiY9U4EBTsqizMxItRCoGgK5apeM7D3mxlHrSKpdQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.50.1
+      react: 18.3.1
     dev: false
 
   /@testing-library/dom@10.3.1:
@@ -2455,6 +2474,10 @@ packages:
       signal-exit: 4.1.0
     dev: true
 
+  /fp-ts@2.16.8:
+    resolution: {integrity: sha512-nmDtNqmMZkOxu0M5hkrS9YA15/KPkYkILb6Axg9XBAoUoYEtzg+LFmVWqZrl9FNttsW0qIUpx9RCA9INbv+Bxw==}
+    dev: false
+
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
@@ -2716,6 +2739,14 @@ packages:
       hasown: 2.0.2
       side-channel: 1.0.6
     dev: true
+
+  /io-ts@2.2.21(fp-ts@2.16.8):
+    resolution: {integrity: sha512-zz2Z69v9ZIC3mMLYWIeoUcwWD6f+O7yP92FMVVaXEOSZH1jnVBmET/urd/uoarD1WGBY4rCj8TAyMPzsGNzMFQ==}
+    peerDependencies:
+      fp-ts: ^2.5.0
+    dependencies:
+      fp-ts: 2.16.8
+    dev: false
 
   /is-arguments@1.1.1:
     resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}
