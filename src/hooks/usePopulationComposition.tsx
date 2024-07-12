@@ -66,7 +66,10 @@ export const usePopulationComposition = (prefCodes: number[]) => {
         const prefCode = result.data.prefCode;
         const boundaryYear = result.data.boundaryYear;
         const data = result.data.data.reduce((acc, data) => {
-          acc.set(data.label, data.data);
+          acc.set(
+            data.label,
+            data.data.map(({ year, value }) => ({ year, value })),
+          );
           return acc;
         }, new Map<string, { year: number; value: number }[]>());
 
