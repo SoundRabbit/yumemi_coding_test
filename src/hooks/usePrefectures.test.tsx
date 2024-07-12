@@ -5,7 +5,6 @@ import { renderHook, waitFor } from '@testing-library/react';
 
 import { usePrefectures } from './usePrefectures';
 
-let replacedEnv: jest.ReplaceProperty<typeof process.env> | undefined = undefined;
 let mockFetch: jest.Spied<typeof global.fetch> | undefined = undefined;
 
 const prefectures = {
@@ -204,12 +203,10 @@ const prefectures = {
 
 describe('usePrefectures', () => {
   afterEach(() => {
-    replacedEnv?.restore();
     mockFetch?.mockRestore();
   });
 
   test('APIエンドポイントがhttps://opendata.resas-portal.go.jp/api/v1/prefecturesになっている', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest
       .spyOn(global, 'fetch')
       .mockResolvedValue(new Response(JSON.stringify(prefectures), { status: 200 }));
@@ -224,7 +221,6 @@ describe('usePrefectures', () => {
   });
 
   test('都道府県一覧を取得している', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest
       .spyOn(global, 'fetch')
       .mockResolvedValue(new Response(JSON.stringify(prefectures), { status: 200 }));

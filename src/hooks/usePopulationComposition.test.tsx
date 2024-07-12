@@ -5,7 +5,6 @@ import { renderHook, waitFor } from '@testing-library/react';
 
 import { usePopulationComposition } from './usePopulationComposition';
 
-let replacedEnv: jest.ReplaceProperty<typeof process.env> | undefined = undefined;
 let mockFetch: jest.Spied<typeof global.fetch> | undefined = undefined;
 
 const populationComposition = {
@@ -305,12 +304,10 @@ const populationComposition = {
 
 describe('usePopulationComposition', () => {
   afterEach(() => {
-    replacedEnv?.restore();
     mockFetch?.mockRestore();
   });
 
   test('APIエンドポイントがhttps://opendata.resas-portal.go.jp/api/v1/population/composition/perYearになっている', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest
       .spyOn(global, 'fetch')
       .mockResolvedValue(new Response(JSON.stringify(populationComposition), { status: 200 }));
@@ -333,7 +330,6 @@ describe('usePopulationComposition', () => {
   });
 
   test('人口構成データを取得している', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest
       .spyOn(global, 'fetch')
       .mockResolvedValue(new Response(JSON.stringify(populationComposition), { status: 200 }));
