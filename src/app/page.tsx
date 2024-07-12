@@ -1,11 +1,9 @@
-import { PopulationChart } from '@/components/PopulationChart';
-import { SelectPrefectures } from '@/components/SelectPrefectures';
+import { PopulationChartContainer } from '@/components/molecules/PopulationChartContainer';
 
 const App = () => {
   return (
     <main>
-      <SelectPrefectures />
-      <PopulationChart prefCodes={[1]} categoryLabel='総人口' />
+      <PopulationChartContainer />
     </main>
   );
 };

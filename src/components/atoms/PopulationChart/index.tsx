@@ -1,5 +1,3 @@
-'use client';
-
 import { Label, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { usePopulationChartData } from './usePopulationChartData';
