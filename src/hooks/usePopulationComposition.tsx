@@ -60,23 +60,17 @@ export const usePopulationComposition = (prefCodes: number[]) => {
   const data = useQueries({
     queries,
     combine: (results) => {
-      return results.reduce((acc, result) => {
-        if (!result.isSuccess) return acc;
-
-        const prefCode = result.data.prefCode;
-        const boundaryYear = result.data.boundaryYear;
-        const data = result.data.data.reduce((acc, data) => {
-          acc.set(
-            data.label,
-            data.data.map(({ year, value }) => ({ year, value })),
-          );
-          return acc;
-        }, new Map<string, { year: number; value: number }[]>());
-
-        acc.set(prefCode, { boundaryYear, data });
-
-        return acc;
-      }, new Map<number, PopulationComposition>());
+      return new Map(
+        results
+          .filter((result) => result.isSuccess && !!result.data)
+          .map(({ data: { prefCode, data, boundaryYear } }) => [
+            prefCode,
+            {
+              boundaryYear,
+              data: new Map(data.map(({ label, data }) => [label, data.map(({ year, value }) => ({ year, value }))])),
+            },
+          ]),
+      );
     },
   });
 
