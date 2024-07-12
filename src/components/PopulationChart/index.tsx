@@ -4,12 +4,12 @@ import { Label, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YA
 
 import { usePopulationChartData } from './usePopulationChartData';
 
-export type PopulationiChartProps = {
+export type PopulationChartProps = {
   prefCodes: number[];
   categoryLabel: string;
 };
 
-export const PopulationiChart = ({ prefCodes: maybePrefCodes, categoryLabel }: PopulationiChartProps) => {
+export const PopulationChart = ({ prefCodes: maybePrefCodes, categoryLabel }: PopulationChartProps) => {
   const { prefCodes, prefNames, chartData } = usePopulationChartData(maybePrefCodes, categoryLabel);
 
   return (
