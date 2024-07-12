@@ -1,13 +1,4 @@
-import 'isomorphic-fetch';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
-
-import { usePrefectures } from './usePrefectures';
-
-let mockFetch: jest.Spied<typeof global.fetch> | undefined = undefined;
-
-const prefectures = {
+export const response = {
   message: null,
   result: [
     {
@@ -200,36 +191,3 @@ const prefectures = {
     },
   ],
 };
-
-describe('usePrefectures', () => {
-  afterEach(() => {
-    mockFetch?.mockRestore();
-  });
-
-  test('APIエンドポイントがhttps://opendata.resas-portal.go.jp/api/v1/prefecturesになっている', async () => {
-    mockFetch = jest
-      .spyOn(global, 'fetch')
-      .mockResolvedValue(new Response(JSON.stringify(prefectures), { status: 200 }));
-
-    const { result } = renderHook(() => usePrefectures(), {
-      wrapper: ({ children }) => {
-        return <QueryClientProvider client={new QueryClient()}>{children}</QueryClientProvider>;
-      },
-    });
-    await waitFor(() => expect(result.current).not.toEqual([]));
-    expect(fetch).toHaveBeenCalledWith('https://opendata.resas-portal.go.jp/api/v1/prefectures', expect.anything());
-  });
-
-  test('都道府県一覧を取得している', async () => {
-    mockFetch = jest
-      .spyOn(global, 'fetch')
-      .mockResolvedValue(new Response(JSON.stringify(prefectures), { status: 200 }));
-
-    const { result } = renderHook(() => usePrefectures(), {
-      wrapper: ({ children }) => {
-        return <QueryClientProvider client={new QueryClient()}>{children}</QueryClientProvider>;
-      },
-    });
-    await waitFor(() => expect(result.current).toEqual(prefectures.result));
-  });
-});

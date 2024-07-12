@@ -1,17 +1,14 @@
 /* @jest-environment node */
 import { fetchResas } from './fetchResas';
 
-let replacedEnv: jest.ReplaceProperty<typeof process.env> | undefined = undefined;
 let mockFetch: jest.Spied<typeof fetch> | undefined = undefined;
 
 describe('fetchResas', () => {
   afterEach(() => {
-    replacedEnv?.restore();
     mockFetch?.mockRestore();
   });
 
   test('/で始まるパスから、APIエンドポイントを作成している', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest.spyOn(global, 'fetch').mockResolvedValue(new Response(JSON.stringify({}), { status: 200 }));
 
     await fetchResas('/prefectures', {});
@@ -19,7 +16,6 @@ describe('fetchResas', () => {
   });
 
   test('/で始まらないパスから、APIエンドポイントを作成している', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest.spyOn(global, 'fetch').mockResolvedValue(new Response(JSON.stringify({}), { status: 200 }));
 
     await fetchResas('prefectures', {});
@@ -27,7 +23,6 @@ describe('fetchResas', () => {
   });
 
   test('fetch時に、X-API-KEYにAPIキーが設定されている', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest.spyOn(global, 'fetch').mockResolvedValue(new Response(JSON.stringify({}), { status: 200 }));
 
     await fetchResas('/prefectures', {});
@@ -35,14 +30,13 @@ describe('fetchResas', () => {
       expect.anything(),
       expect.objectContaining({
         headers: {
-          'X-API-KEY': 'RESAS_API_KEY',
+          'X-API-KEY': process.env.RESAS_API_KEY,
         },
       }),
     );
   });
 
   test('fetch時に、パラメータがクエリ文字列に設定されている', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest.spyOn(global, 'fetch').mockResolvedValue(new Response(JSON.stringify({}), { status: 200 }));
 
     await fetchResas('/prefectures', { param1: 'value1', param2: 2 });
@@ -51,7 +45,6 @@ describe('fetchResas', () => {
   });
 
   test('fetch時に、ステータスコードが200以外の場合は例外をthrowする', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest
       .spyOn(global, 'fetch')
       .mockResolvedValue(new Response(JSON.stringify({}), { status: 400, statusText: 'Bad Request' }));
@@ -62,14 +55,15 @@ describe('fetchResas', () => {
   });
 
   test('APIキーが設定されていない場合は例外をthrowする', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: undefined, ...process.env });
+    const replacedEnv = jest.replaceProperty(process, 'env', { ...process.env, RESAS_API_KEY: undefined });
     mockFetch = jest.spyOn(global, 'fetch').mockResolvedValue(new Response(JSON.stringify({}), { status: 200 }));
 
     await expect(fetchResas('/prefectures', {})).rejects.toThrow('RESAS_API_KEY is not set');
+
+    replacedEnv.restore();
   });
 
   test('fetchに成功した場合は、JSONを返す', async () => {
-    replacedEnv = jest.replaceProperty(process, 'env', { RESAS_API_KEY: 'RESAS_API_KEY', ...process.env });
     mockFetch = jest
       .spyOn(global, 'fetch')
       .mockResolvedValue(new Response(JSON.stringify({ key: 'value' }), { status: 200 }));
