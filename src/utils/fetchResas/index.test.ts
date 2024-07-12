@@ -1,5 +1,5 @@
 /* @jest-environment node */
-import { fetchResas } from './fetchResas';
+import { fetchResas } from './index';
 
 let mockFetch: jest.Spied<typeof fetch> | undefined = undefined;
 
@@ -49,7 +49,7 @@ describe('fetchResas', () => {
       .spyOn(global, 'fetch')
       .mockResolvedValue(new Response(JSON.stringify({}), { status: 400, statusText: 'Bad Request' }));
 
-    const { fetchResas } = await import('./fetchResas');
+    const { fetchResas } = await import('./index');
 
     await expect(fetchResas('/prefectures', {})).rejects.toThrow('Bad Request');
   });
