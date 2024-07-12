@@ -3,7 +3,7 @@ import 'isomorphic-fetch';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 
-import { usePrefectures } from './usePrefectures';
+import { usePrefectures } from './index';
 
 let mockFetch: jest.Spied<typeof global.fetch> | undefined = undefined;
 
