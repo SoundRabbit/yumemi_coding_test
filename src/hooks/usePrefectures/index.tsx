@@ -20,6 +20,7 @@ export type Prefecture = {
 
 export const usePrefectures = () => {
   const { data } = useQuery({
+    staleTime: Infinity,
     queryKey: ['prefectures'],
     queryFn: async () => {
       const response = await fetchResas('/prefectures', {});

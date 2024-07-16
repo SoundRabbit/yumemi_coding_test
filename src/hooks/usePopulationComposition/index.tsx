@@ -39,6 +39,7 @@ export const usePopulationComposition = (prefCodes: number[]) => {
   const queries = useMemo(() => {
     return prefCodes.map((prefCode) => {
       return {
+        staleTime: Infinity,
         queryKey: ['population/composition/perYear', prefCode],
         queryFn: async () => {
           const response = await fetchResas('/population/composition/perYear', {
