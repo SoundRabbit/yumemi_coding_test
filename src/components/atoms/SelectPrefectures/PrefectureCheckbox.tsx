@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 
+import styles from './PrefectureCheckbox.module.scss';
+
 export type PrefectureCheckboxProps = {
   prefCode: number;
   prefName: string;
@@ -16,9 +18,15 @@ export const PrefectureCheckbox = ({ prefCode, prefName, isChecked, onChange }: 
   );
 
   return (
-    <label>
-      <input type='checkbox' value={prefCode} checked={isChecked} onChange={handleChange} />
-      {prefName}
+    <label className={styles['label']}>
+      <input
+        type='checkbox'
+        value={prefCode}
+        checked={isChecked}
+        onChange={handleChange}
+        className={styles['checkbox']}
+      />
+      <span>{prefName}</span>
     </label>
   );
 };

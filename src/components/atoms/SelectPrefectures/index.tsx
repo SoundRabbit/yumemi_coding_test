@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { usePrefectures } from '@/hooks/usePrefectures';
 
 import { PrefectureCheckbox } from './PrefectureCheckbox';
+import styles from './index.module.scss';
 
 export type SelectPrefecturesProps = {
   prefCodesSet: Set<number>;
@@ -28,16 +29,17 @@ export const SelectPrefectures = ({ prefCodesSet, onChangeSelect }: SelectPrefec
   );
 
   return (
-    <div>
+    <ol className={styles['checkbox-list']}>
       {prefectures.map((prefecture) => (
-        <PrefectureCheckbox
-          key={prefecture.prefCode}
-          prefCode={prefecture.prefCode}
-          prefName={prefecture.prefName}
-          isChecked={prefCodesSet.has(prefecture.prefCode)}
-          onChange={handleChange}
-        />
+        <li key={prefecture.prefCode}>
+          <PrefectureCheckbox
+            prefCode={prefecture.prefCode}
+            prefName={prefecture.prefName}
+            isChecked={prefCodesSet.has(prefecture.prefCode)}
+            onChange={handleChange}
+          />
+        </li>
       ))}
-    </div>
+    </ol>
   );
 };
