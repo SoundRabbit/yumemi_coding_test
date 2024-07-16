@@ -1,0 +1,6 @@
+@use 'themes' as *;
+
+.checkbox-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10ch, 1fr));
+}

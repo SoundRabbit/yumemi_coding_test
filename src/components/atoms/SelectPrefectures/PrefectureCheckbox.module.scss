@@ -1,0 +1,32 @@
+@use 'themes' as *;
+
+.label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox {
+  &::before {
+    display: inline-block;
+    width: 1.25em;
+    height: 1.25em;
+    margin-right: 0.5em;
+    overflow: hidden;
+    font-size: 0.8em;
+    line-height: 1.25em;
+    text-align: center;
+    border: 1px solid $color-outline;
+    border-radius: 0.25em;
+  }
+
+  &:not(:checked)::before {
+    content: ' ';
+  }
+
+  &:checked::before {
+    color: $color-on-primary-container;
+    content: '✓';
+    background-color: $color-primary-container;
+  }
+}
