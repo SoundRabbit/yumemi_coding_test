@@ -1,0 +1,12 @@
+@use 'themes' as *;
+
+.chart-container {
+  width: 100%;
+  height: 50vh;
+}
+
+@media (width >= $breakpoint-md) {
+  .chart-container {
+    height: 800px;
+  }
+}
