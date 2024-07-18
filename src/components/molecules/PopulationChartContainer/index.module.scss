@@ -1,0 +1,12 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+  justify-items: end;
+}
+
+.item {
+  &--full {
+    width: 100%;
+  }
+}
