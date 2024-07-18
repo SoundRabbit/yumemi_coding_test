@@ -4,6 +4,7 @@ import { PopulationChart } from '@/components/atoms/PopulationChart';
 import { SelectPopulationCategory } from '@/components/atoms/SelectPopulationCategory';
 import { SelectPrefectures } from '@/components/atoms/SelectPrefectures';
 
+import styles from './index.module.scss';
 import { usePopulationChartContainer } from './usePopulationChartContainer';
 
 export type PopulationChartContainerProps = {};
@@ -18,13 +19,17 @@ export const PopulationChartContainer = ({}: PopulationChartContainerProps) => {
   } = usePopulationChartContainer();
 
   return (
-    <>
-      <SelectPrefectures prefCodesSet={prefCodesSet} onChangeSelect={handleChangeSelectedPref} />
+    <section className={styles['container']}>
+      <div className={styles['item--full']}>
+        <SelectPrefectures prefCodesSet={prefCodesSet} onChangeSelect={handleChangeSelectedPref} />
+      </div>
       <SelectPopulationCategory
         categoryLabel={populationCategoryLabel}
         onChange={handleChangePopulationCategoryLabel}
       />
-      <PopulationChart prefCodes={prefCodesList} categoryLabel={populationCategoryLabel} />
-    </>
+      <div className={styles['item--full']}>
+        <PopulationChart prefCodes={prefCodesList} categoryLabel={populationCategoryLabel} />
+      </div>
+    </section>
   );
 };
