@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 
 import { server } from '@/mocks/server';
 
-import { PrefectureCheckbox } from './PrefectureCheckbox';
+import { PrefectureCheckbox } from './index';
 
 describe('PrefectureCheckbox', () => {
   beforeAll(() => {

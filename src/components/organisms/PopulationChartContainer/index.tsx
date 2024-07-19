@@ -2,7 +2,7 @@
 
 import { PopulationChart } from '@/components/atoms/PopulationChart';
 import { SelectPopulationCategory } from '@/components/atoms/SelectPopulationCategory';
-import { SelectPrefectures } from '@/components/atoms/SelectPrefectures';
+import { SelectPrefectures } from '@/components/molecules/SelectPrefectures';
 
 import styles from './index.module.scss';
 import { usePopulationChartContainer } from './usePopulationChartContainer';

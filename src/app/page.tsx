@@ -1,4 +1,4 @@
-import { PopulationChartContainer } from '@/components/molecules/PopulationChartContainer';
+import { PopulationChartContainer } from '@/components/organisms/PopulationChartContainer';
 
 import styles from './page.module.scss';
 
