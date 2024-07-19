@@ -1,3 +1,5 @@
+import { HttpResponse, http } from 'msw';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 
@@ -40,5 +42,21 @@ describe('usePrefectures', () => {
       },
     });
     await waitFor(() => expect(result.current).toEqual(prefecturesResponse.result));
+  });
+
+  test('レスポンスの形式に問題がある場合は、例外が発生する', async () => {
+    server.use(http.get('https://opendata.resas-portal.go.jp/api/v1/prefectures', (_) => HttpResponse.json({})));
+
+    const queryClient = new QueryClient();
+
+    renderHook(() => usePrefectures(), {
+      wrapper: ({ children }) => {
+        return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+      },
+    });
+
+    await waitFor(() =>
+      expect(queryClient.getQueryState(['prefectures'])?.fetchFailureReason?.message).toBe('Invalid response'),
+    );
   });
 });
