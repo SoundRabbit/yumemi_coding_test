@@ -15,7 +15,7 @@
     color: $color-on-surface;
     background-color: $color-surface;
 
-    &[data-checked='true'] {
+    &[data-selected='true'] {
       color: $color-on-primary-container;
       background-color: $color-primary-container;
     }
