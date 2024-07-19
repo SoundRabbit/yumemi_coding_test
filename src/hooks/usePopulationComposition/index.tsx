@@ -1,28 +1,9 @@
-import * as t from 'io-ts';
 import { useMemo } from 'react';
 
 import { useQueries } from '@tanstack/react-query';
 
 import { fetchResas } from '@/utils/fetchResas';
-
-const PopulationCompositionResponse = t.type({
-  result: t.type({
-    boundaryYear: t.number,
-    data: t.array(
-      t.type({
-        label: t.string,
-        data: t.array(
-          t.type({
-            year: t.number,
-            value: t.number,
-          }),
-        ),
-      }),
-    ),
-  }),
-});
-
-type PopulationCompositionResponse = t.TypeOf<typeof PopulationCompositionResponse>;
+import { PopulationCompositionResponse } from '@/utils/types/resasTypes';
 
 export type PopulationComposition = {
   boundaryYear: number;

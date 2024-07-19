@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
+import { PrefectureCheckbox } from '@/components/atoms/PrefectureCheckbox';
 import { usePrefectures } from '@/hooks/usePrefectures';
 
-import { PrefectureCheckbox } from './PrefectureCheckbox';
 import styles from './index.module.scss';
 
 export type SelectPrefecturesProps = {

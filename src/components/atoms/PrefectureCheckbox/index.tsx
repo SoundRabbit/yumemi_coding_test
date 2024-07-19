@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import styles from './PrefectureCheckbox.module.scss';
+import styles from './index.module.scss';
 
 export type PrefectureCheckboxProps = {
   prefCode: number;

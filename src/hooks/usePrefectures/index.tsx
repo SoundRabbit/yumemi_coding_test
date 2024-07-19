@@ -1,17 +1,7 @@
-import * as t from 'io-ts';
-
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchResas } from '@/utils/fetchResas';
-
-const PrefecturesResponse = t.type({
-  result: t.array(
-    t.type({
-      prefCode: t.number,
-      prefName: t.string,
-    }),
-  ),
-});
+import { PrefecturesResponse } from '@/utils/types/resasTypes';
 
 export type Prefecture = {
   prefCode: number;

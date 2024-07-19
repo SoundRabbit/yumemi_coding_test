@@ -1,0 +1,31 @@
+@use 'themes' as *;
+
+.container {
+  position: relative;
+  color: $color-on-primary;
+  background-color: $color-primary;
+  border-radius: 0.25em;
+}
+
+.select {
+  padding: 0.25em 2em 0.25em 0.5em;
+  outline: none;
+
+  &-option {
+    color: $color-on-surface;
+    background-color: $color-surface;
+
+    &[data-selected='true'] {
+      color: $color-on-primary-container;
+      background-color: $color-primary-container;
+    }
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 0.5em;
+  pointer-events: none;
+  transform: translateY(-50%);
+}

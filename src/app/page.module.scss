@@ -1,7 +1,7 @@
 @use 'themes' as *;
 
 .container {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   color: $color-on-surface;
   background-color: $color-surface-container;

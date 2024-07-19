@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { Label, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
+import { PopulationCategoryLabel } from '@/utils/types/resasTypes';
+
 import styles from './index.module.scss';
 import { usePopulationChartData } from './usePopulationChartData';
 
@@ -10,7 +12,7 @@ const lineStyles = lineDashes.flatMap((strokeDasharray) => lineColors.map((strok
 
 export type PopulationChartProps = {
   prefCodes: number[];
-  categoryLabel: string;
+  categoryLabel: PopulationCategoryLabel;
 };
 
 export const PopulationChart = ({ prefCodes: maybePrefCodes, categoryLabel }: PopulationChartProps) => {
