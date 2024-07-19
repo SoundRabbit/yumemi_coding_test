@@ -2,8 +2,9 @@ import { useMemo } from 'react';
 
 import { usePopulationComposition } from '@/hooks/usePopulationComposition';
 import { usePrefectures } from '@/hooks/usePrefectures';
+import { PopulationCategoryLabel } from '@/utils/types/resasTypes';
 
-export const usePopulationChartData = (maybePrefCodes: number[], categoryLabel: string) => {
+export const usePopulationChartData = (maybePrefCodes: number[], categoryLabel: PopulationCategoryLabel) => {
   const prefectures = usePrefectures();
 
   const prefNames = useMemo(
