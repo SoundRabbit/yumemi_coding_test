@@ -5,7 +5,7 @@ import { server } from '@/mocks/server';
 
 import { usePopulationChartData } from './usePopulationChartData';
 
-describe('usePopulationComposition', () => {
+describe('usePopulationChartData', () => {
   beforeAll(() => {
     server.listen();
   });
