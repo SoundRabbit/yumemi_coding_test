@@ -1,16 +1,21 @@
 import { useCallback } from 'react';
 
+import { PopulationCategoryLabel } from '@/utils/types/resasTypes';
+
 import styles from './index.module.scss';
 
 export type SelectPopulationCategoryProps = {
-  categoryLabel: string;
-  onChange: (categoryLabel: string) => void;
+  categoryLabel: PopulationCategoryLabel;
+  onChange: (categoryLabel: PopulationCategoryLabel) => void;
 };
 
 export const SelectPopulationCategory = ({ categoryLabel, onChange }: SelectPopulationCategoryProps) => {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      onChange(e.currentTarget.value);
+      const categoryLabel = PopulationCategoryLabel.decode(e.currentTarget.value);
+      if (categoryLabel._tag === 'Right') {
+        onChange(categoryLabel.right);
+      }
     },
     [onChange],
   );
