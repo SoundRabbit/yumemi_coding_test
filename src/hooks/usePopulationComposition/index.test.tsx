@@ -1,3 +1,5 @@
+import { HttpResponse, http } from 'msw';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 
@@ -65,5 +67,24 @@ describe('usePopulationComposition', () => {
       ],
     ]);
     expect(result.current).toEqual(expected);
+  });
+
+  test('レスポンスの形式に問題がある場合は、例外が発生する', async () => {
+    server.use(
+      http.get('https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear', (_) =>
+        HttpResponse.json({}),
+      ),
+    );
+
+    const queryClient = new QueryClient();
+    const wrapper = ({ children }: any) => <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+
+    renderHook(() => usePopulationComposition([1]), { wrapper });
+
+    await waitFor(() =>
+      expect(queryClient.getQueryState(['population/composition/perYear', 1])?.fetchFailureReason?.message).toBe(
+        'Invalid response',
+      ),
+    );
   });
 });
