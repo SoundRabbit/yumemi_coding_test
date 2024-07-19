@@ -27,7 +27,7 @@ export const response = {
         ],
       },
       {
-        label: ' 年少人口',
+        label: '年少人口',
         data: [
           { year: 1960, value: 1681479, rate: 33.37 },
           { year: 1965, value: 1462123, rate: 28.27 },
